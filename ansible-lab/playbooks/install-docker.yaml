@@ -1,0 +1,40 @@
+---
+- name: Install Docker and Docker Compose plugin on lab servers
+  hosts: lab_servers
+  gather_facts: true
+  become: true
+
+  tasks:
+    - name: Install Docker packages on Debian family
+      apt:
+        name:
+          - docker.io
+          - docker-compose-plugin
+        state: present
+        update_cache: true
+      when: ansible_os_family == "Debian"
+
+    - name: Enable and start Docker service
+      service:
+        name: docker
+        state: started
+        enabled: true
+
+    - name: Check Docker version
+      command: docker --version
+      register: docker_version_result
+      changed_when: false
+      failed_when: false
+
+    - name: Check Docker Compose version
+      command: docker compose version
+      register: docker_compose_version_result
+      changed_when: false
+      failed_when: false
+
+    - name: Show Docker versions
+      debug:
+        msg:
+          - "{{ inventory_hostname }}"
+          - "{{ docker_version_result.stdout | default('Docker not found') }}"
+          - "{{ docker_compose_version_result.stdout | default('Docker Compose not found') }}"

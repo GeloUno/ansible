@@ -1,0 +1,18 @@
+---
+- name: Check disk usage
+  hosts: linux_servers
+  gather_facts: false
+  become: false
+
+  tasks:
+    - name: Run df -h
+      command: df -h
+      register: disk_result
+      changed_when: false
+      failed_when: false
+
+    - name: Show disk usage
+      debug:
+        msg:
+          - "===== {{ inventory_hostname }} ====="
+          - "{{ disk_result.stdout_lines }}"

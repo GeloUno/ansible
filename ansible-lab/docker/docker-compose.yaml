@@ -1,0 +1,160 @@
+services:
+  ubuntu1:
+    build:
+      context: ./ubuntu
+    image: ansible-lab-ubuntu:22.04
+    container_name: ubuntu1
+    hostname: ubuntu1
+    ports:
+      - "2221:22"
+    restart: unless-stopped
+
+  ubuntu2:
+    build:
+      context: ./ubuntu
+    image: ansible-lab-ubuntu:22.04
+    container_name: ubuntu2
+    hostname: ubuntu2
+    ports:
+      - "2222:22"
+    restart: unless-stopped
+
+  ubuntu3:
+    build:
+      context: ./ubuntu
+    image: ansible-lab-ubuntu:22.04
+    container_name: ubuntu3
+    hostname: ubuntu3
+    ports:
+      - "2223:22"
+    restart: unless-stopped
+
+  ubuntu4:
+    build:
+      context: ./ubuntu
+    image: ansible-lab-ubuntu:22.04
+    container_name: ubuntu4
+    hostname: ubuntu4
+    ports:
+      - "2224:22"
+    restart: unless-stopped
+
+  debian1:
+    build:
+      context: ./debian
+    image: ansible-lab-debian:12
+    container_name: debian1
+    hostname: debian1
+    ports:
+      - "2231:22"
+    restart: unless-stopped
+
+  debian2:
+    build:
+      context: ./debian
+    image: ansible-lab-debian:12
+    container_name: debian2
+    hostname: debian2
+    ports:
+      - "2232:22"
+    restart: unless-stopped
+
+  debian3:
+    build:
+      context: ./debian
+    image: ansible-lab-debian:12
+    container_name: debian3
+    hostname: debian3
+    ports:
+      - "2233:22"
+    restart: unless-stopped
+
+  debian4:
+    build:
+      context: ./debian
+    image: ansible-lab-debian:12
+    container_name: debian4
+    hostname: debian4
+    ports:
+      - "2234:22"
+    restart: unless-stopped
+
+  rocky1:
+    build:
+      context: ./rocky
+    image: ansible-lab-rocky:9
+    container_name: rocky1
+    hostname: rocky1
+    ports:
+      - "2241:22"
+    restart: unless-stopped
+
+  rocky2:
+    build:
+      context: ./rocky
+    image: ansible-lab-rocky:9
+    container_name: rocky2
+    hostname: rocky2
+    ports:
+      - "2242:22"
+    restart: unless-stopped
+
+  rocky3:
+    build:
+      context: ./rocky
+    image: ansible-lab-rocky:9
+    container_name: rocky3
+    hostname: rocky3
+    ports:
+      - "2243:22"
+    restart: unless-stopped
+
+  rocky4:
+    build:
+      context: ./rocky
+    image: ansible-lab-rocky:9
+    container_name: rocky4
+    hostname: rocky4
+    ports:
+      - "2244:22"
+    restart: unless-stopped
+
+  centos1:
+    build:
+      context: ./centos
+    image: ansible-lab-centos:stream9
+    container_name: centos1
+    hostname: centos1
+    ports:
+      - "2251:22"
+    restart: unless-stopped
+
+  centos2:
+    build:
+      context: ./centos
+    image: ansible-lab-centos:stream9
+    container_name: centos2
+    hostname: centos2
+    ports:
+      - "2252:22"
+    restart: unless-stopped
+
+  centos3:
+    build:
+      context: ./centos
+    image: ansible-lab-centos:stream9
+    container_name: centos3
+    hostname: centos3
+    ports:
+      - "2253:22"
+    restart: unless-stopped
+
+  centos4:
+    build:
+      context: ./centos
+    image: ansible-lab-centos:stream9
+    container_name: centos4
+    hostname: centos4
+    ports:
+      - "2254:22"
+    restart: unless-stopped

@@ -1,0 +1,34 @@
+---
+- name: Check basic Linux status
+  hosts: linux_servers
+  gather_facts: false
+  become: false
+
+  tasks:
+    - name: Check uptime
+      command: uptime
+      register: uptime_result
+      changed_when: false
+      failed_when: false
+
+    - name: Check disk usage
+      command: df -h
+      register: disk_result
+      changed_when: false
+      failed_when: false
+
+    - name: Check memory usage
+      command: free -h
+      register: memory_result
+      changed_when: false
+      failed_when: false
+
+    - name: Show summary
+      debug:
+        msg:
+          - "===== {{ inventory_hostname }} ====="
+          - "UPTIME: {{ uptime_result.stdout }}"
+          - "DISK:"
+          - "{{ disk_result.stdout_lines }}"
+          - "MEMORY:"
+          - "{{ memory_result.stdout_lines }}"

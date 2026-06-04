@@ -1,0 +1,38 @@
+---
+- name: Deploy nginx demo using Docker Compose
+  hosts: lab_servers
+  gather_facts: false
+  become: true
+
+  vars:
+    compose_project_directory: /opt/nginx-demo
+
+  tasks:
+    - name: Create compose project directory
+      file:
+        path: "{{ compose_project_directory }}"
+        state: directory
+        owner: root
+        group: root
+        mode: "0755"
+
+    - name: Copy docker-compose.yaml
+      copy:
+        src: ../docker/compose/nginx-demo/docker-compose.yaml
+        dest: "{{ compose_project_directory }}/docker-compose.yaml"
+        owner: root
+        group: root
+        mode: "0644"
+
+    - name: Start nginx demo with Docker Compose
+      command: docker compose up -d
+      args:
+        chdir: "{{ compose_project_directory }}"
+      register: compose_up_result
+      changed_when: "'Started' in compose_up_result.stdout or 'Created' in compose_up_result.stdout or 'Recreated' in compose_up_result.stdout"
+
+    - name: Show compose result
+      debug:
+        msg:
+          - "===== {{ inventory_hostname }} ====="
+          - "{{ compose_up_result.stdout_lines }}"

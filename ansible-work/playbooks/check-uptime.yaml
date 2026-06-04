@@ -1,0 +1,16 @@
+---
+- name: Check uptime
+  hosts: linux_servers
+  gather_facts: false
+  become: false
+
+  tasks:
+    - name: Run uptime
+      command: uptime
+      register: uptime_result
+      changed_when: false
+      failed_when: false
+
+    - name: Show uptime
+      debug:
+        msg: "{{ inventory_hostname }}: {{ uptime_result.stdout }}"
