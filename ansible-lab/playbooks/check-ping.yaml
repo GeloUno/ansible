@@ -1,0 +1,9 @@
+---
+- name: Check Ansible connection to lab servers
+  hosts: lab_servers
+  gather_facts: false
+  become: false
+
+  tasks:
+    - name: Ping lab servers
+      ping:

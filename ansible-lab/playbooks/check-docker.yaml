@@ -1,0 +1,32 @@
+---
+- name: Check Docker status on lab servers
+  hosts: lab_servers
+  gather_facts: false
+  become: true
+
+  tasks:
+    - name: Check Docker service status
+      command: systemctl is-active docker
+      register: docker_service_status
+      changed_when: false
+      failed_when: false
+
+    - name: Check Docker version
+      command: docker --version
+      register: docker_version_result
+      changed_when: false
+      failed_when: false
+
+    - name: Check Docker Compose version
+      command: docker compose version
+      register: docker_compose_version_result
+      changed_when: false
+      failed_when: false
+
+    - name: Show Docker status
+      debug:
+        msg:
+          - "===== {{ inventory_hostname }} ====="
+          - "Docker service: {{ docker_service_status.stdout | default('unknown') }}"
+          - "Docker: {{ docker_version_result.stdout | default('not installed') }}"
+          - "Compose: {{ docker_compose_version_result.stdout | default('not installed') }}"

@@ -1,0 +1,8 @@
+- name: Check conncection to hosts
+  hosts: all
+  gather_facts: false
+  become: false
+
+  tasks:
+    - name: Ping hosts
+      ansible.builtin.ping:

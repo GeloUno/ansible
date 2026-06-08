@@ -1,0 +1,25 @@
+---
+- name: Check common services status
+  hosts: all
+  gather_facts: false
+  become: false
+
+  vars:
+    services_to_check:
+      - ssh
+      - nginx
+      - apache2
+      - httpd
+
+  tasks:
+    - name: Check services
+      command: "systemctl is-active {{ item }}"
+      loop: "{{ services_to_check }}"
+      register: services_result
+      changed_when: false
+      failed_when: false
+
+    - name: Show services status
+      debug:
+        msg: "{{ inventory_hostname }} | {{ item.item }} = {{ item.stdout | default('unknown') }}"
+      loop: "{{ services_result.results }}"
