@@ -1,0 +1,17 @@
+- name: Check RAM usage
+  hosts: all
+  gather_facts: false
+  become: false
+
+  tasks:
+    - name: Run free -h
+      command: free -h
+      register: ram_result
+      changed_when: false
+      failed_when: false
+
+    - name: Show RAM usage
+      debug:
+        msg:
+          - "===== {{ inventory_hostname }} ====="
+          - "{{ ram_result.stdout_lines }}"
