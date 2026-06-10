@@ -14,5 +14,5 @@
     - name: Show disk usage
       debug:
         msg:
-          - "===== {{ inventory_hostname }} ====="
+          - ">>>>> ===== {{ inventory_hostname }} ===== <<<<<"
           - "{{ disk_result.stdout_lines }}"
