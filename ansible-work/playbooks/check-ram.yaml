@@ -13,5 +13,5 @@
     - name: Show RAM usage
       debug:
         msg:
-          - "===== {{ inventory_hostname }} ====="
+          - ">>>>> ===== {{ inventory_hostname }} ===== <<<<<"
           - "{{ ram_result.stdout_lines }}"
