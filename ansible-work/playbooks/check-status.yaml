@@ -23,12 +23,26 @@
       changed_when: false
       failed_when: false
 
+    - name: Check CPU usage
+      command: top -bn1 | grep "Cpu(s)"
+      register: cpu_result
+      changed_when: false
+      failed_when: false
+
     - name: Show summary
       debug:
         msg:
-          - "===== {{ inventory_hostname }} ====="
-          - "UPTIME: {{ uptime_result.stdout }}"
-          - "DISK:"
+          - ">>>>> ===== {{ inventory_hostname }} ===== <<<<<"
+          - "***"
+          - "<<<<< ----- CPU: ----- >>>>>"
+          - "{{ cpu_result.stdout_lines }}"
+          - "***"
+          - "<<<<< ----- UPTIME: ----- >>>>>"
+          - "{{ uptime_result.stdout }}"
+          - "***"
+          - "<<<<< ----- DISK: ----- >>>>>"
           - "{{ disk_result.stdout_lines }}"
-          - "MEMORY:"
+          - "***"
+          - "<<<<< ----- MEMORY: ----- >>>>>"
           - "{{ memory_result.stdout_lines }}"
+          - "***"
